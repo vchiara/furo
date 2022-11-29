@@ -91,6 +91,7 @@
 // Structure/Skeleton of the navigation tree (left)
 ////////////////////////////////////////////////////////////////////////////////
 .sidebar-tree
+  font-size: var(--sidebar-item-font-size)
   margin-top: var(--sidebar-tree-space-above)
   margin-bottom: var(--sidebar-item-spacing-vertical)
 
@@ -98,7 +99,6 @@
     padding: 0
     margin-top: 0
     margin-bottom: 0
-    font-size: var(--sidebar-item-font-size)
 
     display: flex
     flex-direction: column
@@ -108,11 +108,9 @@
   li
     position: relative
     margin: 0
-    font-size: var(--sidebar-item-font-size)
 
     > ul
       margin-left: var(--sidebar-item-spacing-horizontal)
-      font-size: 13px !important
 
   .icon
     color: var(--color-sidebar-link-text)
