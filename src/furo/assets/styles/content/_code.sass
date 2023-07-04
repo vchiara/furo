@@ -29,6 +29,7 @@ div[class^="highlight-"]
 pre
   margin: 0
   padding: 0
+  overflow: auto
 
   // Needed to have more specificity than pygments' "pre" selector. :(
   article[role="main"] .highlight &
@@ -38,7 +39,6 @@ pre
   .highlight &
     font-size: var(--code-font-size)
     padding: $code-spacing-vertical $code-spacing-horizontal
-    overflow: auto
 
   // Make it look like all the other blocks.
   &.literal-block
