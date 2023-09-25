@@ -84,6 +84,12 @@ def docs_live(session):
 
 @nox.session(reuse_venv=True)
 def lint(session):
+    session.notify("lint-pre-commit")
+    session.notify("lint-mypy")
+
+
+@nox.session(reuse_venv=True, name="lint-pre-commit")
+def lint_pre_commit(session):
     session.install("pre-commit")
 
     args = list(session.posargs)
@@ -94,11 +100,24 @@ def lint(session):
     session.run("pre-commit", "run", *args)
 
 
+@nox.session(reuse_venv=True, name="lint-mypy")
+def lint_mypy(session):
+    session.install(
+        "-e", ".", "mypy", "types-docutils", "types-Pygments", "types-beautifulsoup4"
+    )
+    session.run("mypy", "src")
+
+
 @nox.session
 def test(session):
-    session.install("-e", ".[test]")
+    session.install("-e", ".", "-r", "tests/requirements.txt")
 
-    args = session.posargs or ["-n", "auto", "--cov", PACKAGE_NAME]
+    args = session.posargs or [
+        "-n=auto",
+        "--cov=src/",
+        "--cov-report=term-missing",
+        "--verbose",
+    ]
     session.run("pytest", *args)
 
 
